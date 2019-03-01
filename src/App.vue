@@ -1,31 +1,60 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
+    <appHeader></appHeader>
+    <div class="main-content">
+      <router-view class="container"/>
     </div>
-    <router-view/>
+    <footer>
+      &copy; 2019 Kenneth Christensen |
+      <a href="https://github.com/webMan1/CS260-CP1">Source</a> |
+      <a href="Https://github.com/webMan1/TaskBurner">API Source</a>
+    </footer>
   </div>
 </template>
 
+<script>
+import Navbar from "./components/layouts/Navbar.vue";
+
+export default {
+  components: {
+    appHeader: Navbar
+  }
+};
+</script>
+
 <style>
 #app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  display: flex;
+  flex-flow: column nowrap;
+  min-height: 100vh;
+}
+.main-content {
+  flex: 1 0 auto;
+  height: 1px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  padding-top: 50px;
+}
+header,
+footer {
+  flex: 0 0 auto;
+}
+
+footer {
+  background-color: var(--dark);
+  color: var(--light);
   text-align: center;
-  color: #2c3e50;
-}
-#nav {
-  padding: 30px;
+  padding: 0.8rem;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
+footer > a {
+  color: var(--light);
+  text-decoration: underline;
 }
 
-#nav a.router-link-exact-active {
-  color: #42b983;
+footer > a:hover {
+  color: var(--primary);
 }
 </style>

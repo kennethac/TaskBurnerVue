@@ -1,0 +1,79 @@
+<template>
+<header>
+      <nav class="navbar navbar-expand-lg navbar-dark primary-bg">
+        <a class="navbar-brand" href="#">TaskBurner</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarNav"
+          aria-controls="navbarNav"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/combined.html">Combined</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/class/english.html">English</a>
+            </li>
+            <li class="nav-item active">
+              <a class="nav-link" href="/class/math.html">
+                Math
+                <span class="sr-only">(current)</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about.html">About</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+      <div class="header-logo-wrapper"></div>
+    </header>
+</template>
+
+<script lang="ts">
+import { Component, Prop, Vue } from "vue-property-decorator";
+
+
+@Component
+export default class Navbar extends Vue {
+//   @Prop() private msg!: string;
+}
+</script>
+
+<!-- Add "scoped" attribute to limit CSS to this component only -->
+<style scoped>
+.primary-bg {
+    background-color: var(--orange);
+}
+
+.header-logo-wrapper {
+    background-color: white;
+    border: var(--orange) 10px solid;
+    border-radius: 50%;
+    height: 160px;
+    width: 160px;
+    background-image: url("/img/blaze_sm.png");
+    background-color: white;
+    background-position: center;
+    background-size: 120px;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 0;
+    left: calc(50vw - 80px);
+    z-index: 100;
+}
+
+.navbar {
+    min-height: 80px;
+}
+</style>
