@@ -1,21 +1,34 @@
 <template>
   <div>
-    <p>Week view {{ myState.state.selectedClass }}</p>
+    <p>Week view {{ currentClass.classTitle }}</p>
+    <ol>
+      <li v-for="task in currentClass.tasks" :key="task.name">{{ task.name }}</li>
+    </ol>
   </div>
 </template>
 
 <script lang="ts">
-
-import { Component, Prop, Vue } from "vue-property-decorator";
-import { mapMutations } from 'vuex';
+import { Component, Prop, Vue, Watch } from "vue-property-decorator";
+import { mapMutations } from "vuex";
+import RootStore from "@/models/root-store";
+import ClassInfo from "@/models/class-info";
 
 @Component
 export default class Weekview extends Vue {
-  @Prop() private classData!: object;
-  myState: object;
+  @Prop() private classKey!: string;
+
   constructor() {
     super();
-    this.myState = this.classData;
+    this.requestUpdate();
+  }
+
+  get currentClass() {
+    return <ClassInfo>this.$store.getters.getClass(this.classKey);
+  }
+
+  @Watch("classKey")
+  requestUpdate() {
+    this.$store.dispatch("update", this.classKey);
   }
 }
 </script>

@@ -14,15 +14,12 @@ export default new Vuex.Store({
   },
   mutations: {
     setClassInfo(state: RootStore, payload : {classKey: string, classInfo: ClassInfo}) {
-      if (!state.classData.hasOwnProperty(payload.classKey)) {
-        state.classData = { ...state.classData, classKey: <ClassInfo>{} };
-      }
-
+      Vue.set(state.classData, payload.classKey, payload.classInfo);
     },
 
     setLoading(state: RootStore, payload : {classKey: string, loading: boolean}) {
       if (!state.classData.hasOwnProperty(payload.classKey)) {
-        state.classData = { ...state.classData, classKey: <ClassInfo>{} };
+        Vue.set(state.classData, payload.classKey, <ClassInfo>{});
       }
 
       if (!state.classData[payload.classKey].hasOwnProperty("loading")) {
@@ -34,6 +31,7 @@ export default new Vuex.Store({
   },
   actions: {
     async update({ commit, store }, classKey) {
+      console.log(classKey);
       // Update the class.
       let url = webpackHotUpdate
         ? "http://localhost:3000/tasks/"
@@ -42,6 +40,7 @@ export default new Vuex.Store({
       commit("setLoading", {
         classKey, loading: true
       });
+
       var response = await fetch(url + classKey);
 
       if (!response.ok) {
@@ -56,7 +55,7 @@ export default new Vuex.Store({
       });
 
       commit("setLoading", {
-        classKey, loadin: false
+        classKey, loading: false
       });
     }
   },
@@ -68,8 +67,9 @@ export default new Vuex.Store({
     },
     getClass: (state: RootStore) => (classKey: string) => {
       let data = state.classData[classKey];
-      // Kick off the update.
-
+      if (data === undefined) {
+        data = <ClassInfo>{};
+      }
       return data;
     }
   }
