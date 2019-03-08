@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import Vuex from 'vuex'
+import Vuex, { Store } from 'vuex'
 import { Dictionary } from 'vue-router/types/router';
 import RootStore from './models/root-store';
 import ClassInfo from './models/class-info';
@@ -14,6 +14,19 @@ export default new Vuex.Store({
   },
   mutations: {
     setClassInfo(state: RootStore, payload : {classKey: string, classInfo: ClassInfo}) {
+      console.log("Setting!");
+      if (state.classData.hasOwnProperty(payload.classKey) && state.classData[payload.classKey].lastUpdated === payload.classInfo.lastUpdated) {
+        console.log("Quitting");
+        return;
+      }
+      else {
+        console.log("Not quitting.");
+        try {
+          console.log(state.classData[payload.classKey].lastUpdated + " vs " + payload.classInfo.lastUpdated);
+        } catch (error) {
+          console.log(error);
+        }
+      }
       Vue.set(state.classData, payload.classKey, payload.classInfo);
     },
 
