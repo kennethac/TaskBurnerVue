@@ -79,6 +79,17 @@ export default new Vuex.Store({
       return 0;
     },
     getClass: (state: RootStore) => (classKey: string) => {
+      if (classKey === "all") {
+        console.log("All tasks.");
+        let data = <ClassInfo>{};
+        data.classTitle = "All Tasks";
+        data.loading = false;
+        data.tasks = [];
+        let allProjects = state.classData;
+        Object.keys(allProjects).map((k) => allProjects[k]).reduce((acc, next) => data.tasks  = data.tasks.concat(next.tasks));
+        return data;
+      }
+
       let data = state.classData[classKey];
       if (data === undefined) {
         data = <ClassInfo>{};

@@ -19,7 +19,7 @@
             <router-link to="/" class="nav-link">Home</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/" class="nav-link">Combined</router-link>
+            <router-link to="/combined" class="nav-link">Combined</router-link>
           </li>
           <li class="nav-item">
             <router-link to="/class/english" class="nav-link">English</router-link>

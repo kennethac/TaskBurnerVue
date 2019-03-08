@@ -21,6 +21,12 @@ export default new Router({
       props: true
     },
     {
+      path: '/combined',
+      name: 'combined',
+      component: Class,
+      props: { classKey: "all" }
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting
