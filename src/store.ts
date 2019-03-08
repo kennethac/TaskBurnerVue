@@ -31,7 +31,7 @@ export default new Vuex.Store({
   },
   actions: {
     async update({ commit, store }, classKey) {
-      console.log(classKey);
+      console.log("Update with: " + classKey);
       // Update the class.
       let url = webpackHotUpdate
         ? "http://localhost:3000/tasks/"

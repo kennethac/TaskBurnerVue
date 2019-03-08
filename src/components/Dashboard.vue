@@ -37,6 +37,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from "vue-property-decorator";
+import Chart from "chart.js";
 
 var style = getComputedStyle(document.body);
 var primaryColor = style.getPropertyValue('--orange');
@@ -93,8 +94,6 @@ async function getData(className) {
 }
 
 function initChart(context, dataset) {
-  console.log(context);
-  console.log(dataset);
   new Chart(context, {
     type: "pie",
     data: dataset,

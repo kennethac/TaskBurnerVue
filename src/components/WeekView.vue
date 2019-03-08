@@ -15,20 +15,26 @@ import ClassInfo from "@/models/class-info";
 
 @Component
 export default class Weekview extends Vue {
-  @Prop() private classKey!: string;
+  @Prop() private classKey!: object;
+  myClassKey : object = this.classKey;
 
   constructor() {
     super();
-    this.requestUpdate();
+  } 
+  
+  mounted() {
+    console.log("Mounted: " + this.myClassKey.classKey);
+    setTimeout(this.requestUpdate, 1);
+    // this.requestUpdate();
   }
 
   get currentClass() {
-    return <ClassInfo>this.$store.getters.getClass(this.classKey);
+    return <ClassInfo>this.$store.getters.getClass(this.myClassKey.classKey);
   }
 
-  @Watch("classKey")
+  @Watch("myClassKey")
   requestUpdate() {
-    this.$store.dispatch("update", this.classKey);
+    this.$store.dispatch("update", this.myClassKey.classKey);
   }
 }
 </script>
