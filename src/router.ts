@@ -15,9 +15,10 @@ export default new Router({
       component: Home
     },
     {
-      path: '/class/:className',
+      path: '/class/:classKey',
       name: 'class',
-      component: Class
+      component: Class,
+      props: true
     },
     {
       path: '/about',

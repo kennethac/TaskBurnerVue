@@ -68,90 +68,33 @@ function groupBy(list: Task[], selector: Function) {
 
 @Component
 export default class Weekview extends Vue {
-  @Prop() private classKey!: object;
-  myClassKey: object = this.classKey;
+  @Prop() private classKey!: string;
 
   constructor() {
     super();
   }
 
-  // mounted() {
-  //   console.log("Mounted: " + this.myClassKey.classKey);
-  //   setTimeout(this.requestUpdate, 1);
-  //   // this.requestUpdate();
-  // }
-
   get currentClass() {
-    this.$store.dispatch("update", this.myClassKey.classKey);
-    return <ClassInfo>this.$store.getters.getClass(this.myClassKey.classKey);
+    this.$store.dispatch("update", this.classKey);
+    return <ClassInfo>this.$store.getters.getClass(this.classKey);
   }
 
   get scheduledDays() {
     let classData = this.currentClass;
     if (classData === undefined || classData.tasks === undefined) {
-      console.log("Class DATA");
-      console.log(classData);
       return [];
     }
 
-    console.log("Num tasks: " + classData.tasks.length);
-
-    console.log("Dateline: " + addDays(new Date(), 7));
     let soon = classData.tasks.filter(
       t => new Date(t.scheduledDate) < addDays(new Date(), 7)
     );
 
-    console.log("Num soon: " + soon.length);
-
     return groupBy(soon, (t: Task) => new Date(t.scheduledDate).valueOf());
   }
-
-  // @Watch("myClassKey")
-  // requestUpdate() {
-  //   this.$store.dispatch("update", this.myClassKey.classKey);
-  // }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-:root {
-  --primary-color: var(--orange);
-  --accent-color: var(--red);
-  --logo-font: "CharBB";
-}
-.primary-bg {
-  background-color: var(--primary-color);
-}
 
-.chart-container {
-  text-align: center;
-  display: inline;
-}
-
-.medium-chart {
-  width: 400px;
-  height: 400px;
-  position: relative;
-}
-
-.chart-area {
-  display: flex;
-  flex-flow: row wrap;
-  justify-content: space-between;
-}
-
-.chart-area a,
-.chart-container {
-  flex: 1 0 auto;
-  min-width: 25vw;
-  display: flex;
-  justify-content: center;
-  padding: 20px;
-}
-
-.flex-entry {
-  display: flex;
-  flex-flow: row nowrap;
-}
 </style>
