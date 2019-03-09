@@ -6,7 +6,7 @@
     </div>
     <footer>
       &copy; 2019 Kenneth Christensen |
-      <a href="https://github.com/webMan1/CS260-CP1">Source</a> |
+      <a href="https://github.com/webMan1/TaskBurnerVue">Source</a> |
       <a href="Https://github.com/webMan1/TaskBurner">API Source</a>
     </footer>
   </div>
