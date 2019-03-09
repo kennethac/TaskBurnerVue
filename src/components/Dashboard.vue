@@ -2,7 +2,10 @@
   <div>
     <h2>Welcome, Kenneth!</h2>
     <p>Keep it up, you're doing great!</p>
-    <ProgressPie classKey="english" link="/classes/english"></ProgressPie>
+    <div class="chart-area">
+      <ProgressPie classKey="math" link="/classes/math"></ProgressPie>
+      <ProgressPie classKey="english" link="/classes/english"></ProgressPie>
+    </div>
   </div>
 </template>
 
@@ -16,8 +19,7 @@ import Chart from "chart.js";
     ProgressPie
   }
 })
-export default class Dashboard extends Vue {
-}
+export default class Dashboard extends Vue {}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

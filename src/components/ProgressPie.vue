@@ -1,6 +1,5 @@
 <template>
   <div class="chart-container">
-    <h3>Test</h3>
     <a :href="link">
       <div class="medium-chart chart-wrapper">
         <canvas ref="chart" class="chart"></canvas>
@@ -36,6 +35,11 @@ export default class ProgressPie extends Vue {
     this.initialize();
   }
 
+  @Watch("currentClass")
+  reset() {
+    this.initialize();
+  }
+
   initialize() {
     let canvasElement = <HTMLCanvasElement>this.$refs.chart;
     let context = canvasElement.getContext("2d");
@@ -56,7 +60,6 @@ export default class ProgressPie extends Vue {
   }
 
   get currentClass() {
-    this.$store.dispatch("update", this.classKey);
     return <ClassInfo>this.$store.getters.getClass(this.classKey);
   }
 
@@ -77,7 +80,7 @@ export default class ProgressPie extends Vue {
     return {
       datasets: [
         {
-          label: classData.classTitle + " Progress",
+          label: classData.name + " Progress",
           data: [percent, 1 - percent],
           backgroundColor: [successColor, primaryColor]
         }
