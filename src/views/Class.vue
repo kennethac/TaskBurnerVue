@@ -28,7 +28,7 @@ export default class Class extends Vue {
 
   get className() {
     try {
-      this.$store.dispatch("update", this.myClassKey.classKey);
+      this.$store.dispatch("update", this.classKey);
       return this.$store.getters.getClass(this.classKey).name;
     } catch (e) {
       return "";

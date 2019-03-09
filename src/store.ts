@@ -43,12 +43,9 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async update({ commit, store }, classKey) {
+    async update({commit}, classKey) {
       console.log("Update with: " + classKey);
-      // Update the class.
-      let url = webpackHotUpdate
-        ? "http://localhost:3000/tasks/"
-        : "http://taskburner.kennethchristensen.me/api/tasks/";
+      let url = process.env.VUE_APP_TASKS_ENDPOINT;
 
       commit("setLoading", {
         classKey, loading: true
@@ -86,7 +83,7 @@ export default new Vuex.Store({
         data.loading = false;
         data.tasks = [];
         let allProjects = state.classData;
-        Object.keys(allProjects).map((k) => allProjects[k]).reduce((acc, next) => data.tasks  = data.tasks.concat(next.tasks));
+        Object.keys(allProjects).map((k) => allProjects[k]).forEach((next) => data.tasks  = data.tasks.concat(next.tasks));
         return data;
       }
 
