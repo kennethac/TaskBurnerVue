@@ -24,11 +24,11 @@
           <li class="nav-item">
             <router-link to="/class/english" class="nav-link">English</router-link>
           </li>
-          <li class="nav-item active">
+          <li class="nav-item">
               <router-link to="/class/math" class="nav-link">Math</router-link>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/about.html">About</a>
+            <router-link to="/about" class="nav-link">About</router-link>
           </li>
         </ul>
       </div>
@@ -71,5 +71,9 @@ export default class Navbar extends Vue {
 
 .navbar {
   min-height: 80px;
+}
+
+li > a.router-link-exact-active.nav-link {
+  color: #fff;
 }
 </style>
