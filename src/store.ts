@@ -3,6 +3,7 @@ import Vuex, { Store } from 'vuex'
 import { Dictionary } from 'vue-router/types/router';
 import RootStore from './models/root-store';
 import ClassInfo from './models/class-info';
+import Task from '@/models/task'
 
 Vue.use(Vuex)
 
@@ -13,7 +14,7 @@ export default new Vuex.Store({
     }
   },
   mutations: {
-    setClassInfo(state: RootStore, payload : {classKey: string, classInfo: ClassInfo}) {
+    setClassInfo(state: RootStore, payload: { classKey: string, classInfo: ClassInfo }) {
       console.log("Setting!");
       if (state.classData.hasOwnProperty(payload.classKey) && state.classData[payload.classKey].lastUpdated === payload.classInfo.lastUpdated) {
         console.log("Quitting");
@@ -27,10 +28,17 @@ export default new Vuex.Store({
           console.log(error);
         }
       }
+
+      // Set all dates to be dates.
+      for (let index in payload.classInfo.tasks) {
+        console.log(index);
+        payload.classInfo.tasks[index] = Task.from(payload.classInfo.tasks[index]);
+      }
+
       Vue.set(state.classData, payload.classKey, payload.classInfo);
     },
 
-    setLoading(state: RootStore, payload : {classKey: string, loading: boolean}) {
+    setLoading(state: RootStore, payload: { classKey: string, loading: boolean }) {
       if (!state.classData.hasOwnProperty(payload.classKey)) {
         Vue.set(state.classData, payload.classKey, <ClassInfo>{});
       }
@@ -40,10 +48,15 @@ export default new Vuex.Store({
       } else {
         state.classData[payload.classKey].loading = payload.loading;
       }
+    },
+
+    addTask(state: RootStore, payload: { classKey: string, task: Task }) {
+      console.log(payload);
+      state.classData[payload.classKey].tasks.splice(0, 0, payload.task);
     }
   },
   actions: {
-    async update({commit}, classKey) {
+    async update({ commit }, classKey) {
       console.log("Update with: " + classKey);
       let url = process.env.VUE_APP_TASKS_ENDPOINT;
 
@@ -83,7 +96,7 @@ export default new Vuex.Store({
         data.loading = false;
         data.tasks = [];
         let allProjects = state.classData;
-        Object.keys(allProjects).map((k) => allProjects[k]).forEach((next) => data.tasks  = data.tasks.concat(next.tasks));
+        Object.keys(allProjects).map((k) => allProjects[k]).forEach((next) => data.tasks = data.tasks.concat(next.tasks));
         return data;
       }
 
