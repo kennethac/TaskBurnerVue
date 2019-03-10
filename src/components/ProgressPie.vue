@@ -1,10 +1,10 @@
 <template>
   <div class="chart-container">
-    <a :href="link">
+    <router-link :to="link">
       <div class="medium-chart chart-wrapper">
         <canvas ref="chart" class="chart"></canvas>
       </div>
-    </a>
+    </router-link>
   </div>
 </template>
 

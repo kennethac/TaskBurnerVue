@@ -11,6 +11,7 @@
 <script lang="ts">
 import Vue from "vue";
 import { Component, Prop, Watch } from "vue-property-decorator";
+import Task from '@/models/task'
 
 @Component
 export default class AddTask extends Vue {
@@ -27,12 +28,7 @@ export default class AddTask extends Vue {
 
     this.$store.commit("addTask", {
       classKey: this.classKey,
-      task: {
-        name: this.newTaskName,
-        dueDate: new Date(this.newTaskDueDate!),
-        completed: false,
-        scheduledDate: new Date(this.newTaskScheduledDate!)
-      }
+      task: new Task(this.newTaskName, new Date(this.newTaskDueDate!), new Date(this.newTaskScheduledDate!), false)
     });
     this.newTaskName = "";
     this.newTaskDueDate = null;

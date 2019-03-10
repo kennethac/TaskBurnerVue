@@ -14,8 +14,8 @@
         <tr v-for="task in currentClass.tasks" :key="task.name">
             <td>{{ task.complete ? "Yes" : "No" }}</td>
             <td>{{ task.name }}</td>
-            <td>{{ task.dueDate }}</td>
-            <td>{{ task.scheduledDate }}</td>
+            <td>{{ task.shortDueDate }}</td>
+            <td>{{ task.shortScheduledDate }}</td>
         </tr>
       </tbody>
     </table>

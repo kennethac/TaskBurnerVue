@@ -3,8 +3,8 @@
     <h2>Welcome, Kenneth!</h2>
     <p>Keep it up, you're doing great!</p>
     <div class="chart-area">
-      <ProgressPie classKey="math" link="/classes/math"></ProgressPie>
-      <ProgressPie classKey="english" link="/classes/english"></ProgressPie>
+      <ProgressPie classKey="math" link="/class/math"></ProgressPie>
+      <ProgressPie classKey="english" link="/class/english"></ProgressPie>
     </div>
   </div>
 </template>
